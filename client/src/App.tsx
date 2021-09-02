@@ -14,7 +14,7 @@ export const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <h1>Hello from the frontend 3!</h1>
+      <h1>Hello from the frontend 4!</h1>
       <h1>{response.body}</h1>
     </div>
   );
