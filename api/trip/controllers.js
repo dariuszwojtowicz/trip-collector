@@ -19,6 +19,7 @@ const getOne = (req, res) => {
   }
   return Trip
     .findById(tripId)
+    .populate('city', 'name')
     .then((trip) => {
       if (trip) {
         return res.json(trip);
