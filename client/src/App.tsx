@@ -3,10 +3,10 @@ import axios from 'axios'
 import './App.css';
 
 export const App = (): JSX.Element => {
-  const [response, setResponse] = useState<{ body?: string }>({});
+  const [response, setResponse] = useState<{ name: string }[]>();
 
   useEffect(() => {
-    axios.get('/api/v1/say-hello').then((res) => {
+    axios.get('/api/v1/trips').then((res) => {
       const response = res.data;
       setResponse(response);
     });
@@ -14,8 +14,8 @@ export const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <h1>Hello from the frontend 4!</h1>
-      <h1>{response.body}</h1>
+      <h1>Hello from the frontend 5!</h1>
+      <h1>{response ? response.map(trip => trip.name).join(', ') : 'No trips defined'}</h1>
     </div>
   );
 }

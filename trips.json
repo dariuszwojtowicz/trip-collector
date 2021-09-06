@@ -1,0 +1,125 @@
+[
+  {
+    "accommodation": {
+      "coords": []
+    },
+    "flight": {
+      "to": {
+        "fromAirport": {
+          "coords": []
+        },
+        "toAirport": {
+          "coords": []
+        }
+      },
+      "from": {
+        "fromAirport": {
+          "coords": []
+        },
+        "toAirport": {
+          "coords": []
+        }
+      }
+    },
+    "_id": "61272b60d73bb71971fd8d7c",
+    "name": "Fuerteventura",
+    "toSee": [],
+    "events": [],
+    "expenses": [],
+    "notes": [],
+    "toTake": [],
+    "toHandle": []
+  },
+  {
+    "accommodation": {
+      "name": "Great Hotel",
+      "coords": [
+        "1.23",
+        "2.34"
+      ]
+    },
+    "flight": {
+      "to": {
+        "fromAirport": {
+          "coords": [
+            "1.23",
+            "2.34"
+          ]
+        },
+        "toAirport": {
+          "coords": [
+            "1.23",
+            "2.34"
+          ]
+        }
+      },
+      "from": {
+        "fromAirport": {
+          "coords": [
+            "1.23",
+            "2.34"
+          ]
+        },
+        "toAirport": {
+          "coords": [
+            "1.23",
+            "2.34"
+          ]
+        }
+      }
+    },
+    "_id": "6135aea95b4ac0ccc0ccd2cf",
+    "name": "Mallorca",
+    "dateFrom": "16.10",
+    "dateTo": "19.10",
+    "toSee": [
+      {
+        "name": "Formentor",
+        "coords": [
+          "1.23",
+          "2.34"
+        ],
+        "_id": "6135aea95b4ac0ccc0ccd2d0"
+      }
+    ],
+    "events": [
+      {
+        "name": "Check out",
+        "date": "wtorek",
+        "time": "16.00",
+        "_id": "6135aea95b4ac0ccc0ccd2d1"
+      }
+    ],
+    "expenses": [
+      {
+        "name": "Hotel",
+        "amount": 15,
+        "currency": "PLN",
+        "_id": "6135aea95b4ac0ccc0ccd2d2",
+        "userCurrencyAmount": 15
+      }
+    ],
+    "notes": [
+      {
+        "name": "Spoko wypożyczalnie aut",
+        "content": "Ta jest ok https://auto.pl",
+        "_id": "6135aea95b4ac0ccc0ccd2d3"
+      }
+    ],
+    "toTake": [
+      {
+        "name": "kąpielówki",
+        "done": false,
+        "_id": "6135aea95b4ac0ccc0ccd2d4"
+      }
+    ],
+    "toHandle": [
+      {
+        "name": "Ogarnąć euro",
+        "done": false,
+        "_id": "6135aea95b4ac0ccc0ccd2d5"
+      }
+    ],
+    "__v": 0
+  }
+]

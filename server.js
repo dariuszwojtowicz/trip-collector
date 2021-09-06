@@ -1,25 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const api = require('./api/api');
+const mongoose = require('mongoose');
 const path = require('path');
-const api = require('./routes/routes');
+const applyMiddleware = require('./middleware/middleware');
+const mongoPath = 'mongodb+srv://trip-collector:2XotZgXjncD8y6t7@trip-collector.hhxdi.mongodb.net/trip-collector?retryWrites=true&w=majority';
 
-const app = express();
 const port = process.env.PORT || 5000;
 
-app.use((req, res, next) => {
-  console.log(`Request_Endpoint: ${req.method} ${req.url}`);
-  next();
-});
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(cors());
+const app = express();
+
+applyMiddleware(app);
 
 app.use('/api/v1/', api);
 
-// This middleware informs the express application to serve our compiled React files
 if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') {
   app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -34,4 +27,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
+mongoose.connect(mongoPath).then(() => {
+  app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
+});
