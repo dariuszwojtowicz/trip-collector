@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ToSeeSchema = new Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   coords: [String]
 });
 
@@ -12,13 +12,13 @@ const NoteSchema = new Schema({
 });
 
 const EventSchema = new Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   date: { type: String, required: true },
   time: { type: String, required: true },
 });
 
 const ExpenseSchema = new Schema({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   amount: { type: Number, required: true },
   currency: { type: String, required: true, default: 'PLN' },
   userCurrencyAmount: {
@@ -80,3 +80,5 @@ const TripSchema = new Schema({
 });
 
 module.exports = mongoose.model('Trip', TripSchema);
+
+// TODO make Arrays (toSee, events) have values unique by name
