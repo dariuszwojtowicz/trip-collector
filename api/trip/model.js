@@ -37,7 +37,7 @@ const TodoSchema = new Schema({
 
 const TripSchema = new Schema({
   name: { type: String, required: true, unique: true },
-  city: { type: Schema.Types.ObjectId, ref: 'City' },
+  city: { type: Schema.Types.ObjectId, ref: 'City', required: true },
   dateFrom: { type: String, required: true },
   dateTo: { type: String, required: true },
   toSee: [ToSeeSchema],

@@ -1,5 +1,47 @@
-const Trip = require('./model');
+const axios = require('axios');
 const mongoose = require('mongoose');
+const Trip = require('./model');
+
+const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=minutely'
+  + '&APPID=8faa7769b2066e22513f02e6aa871489';
+
+const getTripWeather = (req, res) => {
+  const {id} = req.params;
+  let tripId;
+  try {
+    tripId = mongoose.Types.ObjectId(id);
+  } catch (err) {
+    return res.status(500).json({
+      message: `Wrong id: ${id}`,
+      error: err.toString()
+    });
+  }
+  Trip
+    .findById(tripId)
+    .populate('city', 'coord')
+    .then(async (trip) => {
+      console.log(trip);
+      if (trip) {
+        const { lon, lat } = trip.city.coord;
+        try {
+          const response = await axios.get(`${weatherApiUrl}&lon=${lon}&lat=${lat}`);
+          return res.status(200).json(response.data);
+        } catch (err) {
+          return res.status(500).json({
+            message: `Error during fetching weather for trip with id: ${id}`,
+            error: err.toString()
+          });
+        }
+      }
+      return res.status(404).json({ message: `Trip with id: ${id} does not exists` });
+    })
+    .catch(err => res.status(500)
+      .json({
+        message: `Error during fetching Trip with id: ${id}`,
+        error: err
+      })
+    );
+};
 
 const get = (req, res, next) => Trip
   .find({})
@@ -101,5 +143,6 @@ module.exports = {
   getOne,
   post,
   put,
-  remove
+  remove,
+  getTripWeather
 };

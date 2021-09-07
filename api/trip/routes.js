@@ -11,4 +11,7 @@ router.route('/:id')
   .delete(controller.remove)
   .put(controller.put);
 
+router.route('/:id/weather')
+  .get(controller.getTripWeather);
+
 module.exports = router;
