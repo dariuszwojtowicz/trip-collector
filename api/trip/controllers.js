@@ -5,6 +5,67 @@ const Trip = require('./model');
 const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=minutely'
   + '&APPID=8faa7769b2066e22513f02e6aa871489';
 
+
+const getTripToSee = (req, res) => {
+  const {id} = req.params;
+  let tripId;
+  try {
+    tripId = mongoose.Types.ObjectId(id);
+  } catch (err) {
+    return res.status(500).json({
+      message: `Wrong id: ${id}`,
+      error: err.toString()
+    });
+  }
+  Trip
+    .findById(tripId)
+    .populate('toSee')
+    .then((trip) => {
+      if (trip) {
+        return res.status(200).json(trip.toSee || []);
+      }
+      return res.status(404).json({ message: `Trip with id: ${id} does not exists` });
+    })
+    .catch(err => res.status(500)
+      .json({
+        message: `Error during fetching Trip with id: ${id}`,
+        error: err
+      })
+    );
+};
+
+const putTripToSee = (req, res) => {
+  const {id} = req.params;
+  let tripId;
+  try {
+    tripId = mongoose.Types.ObjectId(id);
+  } catch (err) {
+    return res.status(500).json({
+      message: `Wrong id: ${id}`,
+      error: err.toString()
+    });
+  }
+  Trip
+    .findById(tripId)
+    .then((trip) => {
+      if (trip) {
+        Trip.findByIdAndUpdate(tripId, { ...trip.toJSON(), toSee: req.body }, { new: true, runValidators: true })
+          .then((updatedTrip) => {
+            return res.status(200).json(updatedTrip.toSee);
+          })
+      } else {
+        return res.status(404).json({message: `Trip with id: ${id} does not exists`});
+      }
+    })
+    .catch(err => res.status(500)
+      .json({
+        message: `Error during updating To See for Trip with id: ${id}`,
+        error: err
+      })
+    );
+};
+
+
 const getTripWeather = (req, res) => {
   const {id} = req.params;
   let tripId;
@@ -144,5 +205,7 @@ module.exports = {
   post,
   put,
   remove,
-  getTripWeather
+  getTripWeather,
+  getTripToSee,
+  putTripToSee
 };

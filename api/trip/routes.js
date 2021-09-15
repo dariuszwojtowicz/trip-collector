@@ -14,4 +14,8 @@ router.route('/:id')
 router.route('/:id/weather')
   .get(controller.getTripWeather);
 
+router.route('/:id/to-see')
+  .get(controller.getTripToSee)
+  .put(controller.putTripToSee);
+
 module.exports = router;
