@@ -2,6 +2,8 @@ const express = require('express');
 const controller = require('./controllers');
 const router = express.Router();
 
+router.param('id', controller.paramId);
+
 router.route('/')
   .get(controller.get)
   .post(controller.post);
